@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using System;
+using engenious;
+using engenious.Graphics;
 
 namespace MonoGameUi
 {
@@ -118,15 +118,16 @@ namespace MonoGameUi
             }
         }
 
-        public ProgressBar(IScreenManager manager, string style = "") :
-            base(manager, style)
+        public ProgressBar(IScreenManager manager, string style = "")
+            : base(manager, style)
         {
             ApplySkin(typeof(ProgressBar));
         }
 
         protected override void OnDrawContent(SpriteBatch batch, Rectangle contentArea, GameTime gameTime, float alpha)
         {
-            if (BarBrush == null) return;
+            if (BarBrush == null)
+                return;
 
             int m = Math.Max(0, Maximum);
             int v = Math.Max(0, Math.Min(m, Value));
@@ -134,18 +135,29 @@ namespace MonoGameUi
 
             if (Orientation == Orientation.Horizontal)
                 BarBrush.Draw(batch, new Rectangle(contentArea.X, contentArea.Y, 
-                    (int)(contentArea.Width * part), contentArea.Height), alpha);
+                        (int)(contentArea.Width * part), contentArea.Height), alpha);
             else if (Orientation == Orientation.Vertical)
             {
                 BarBrush.Draw(batch, new Rectangle(contentArea.X, contentArea.Y,
-                    contentArea.Width, (int)(contentArea.Height * part)), alpha);
+                        contentArea.Width, (int)(contentArea.Height * part)), alpha);
             }
         }
 
-        protected virtual void OnOrientationChanged(PropertyEventArgs<Orientation> args) { }
-        protected virtual void OnValueChanged(PropertyEventArgs<int> args) { }
-        protected virtual void OnMaximumChanged(PropertyEventArgs<int> args) { }
-        protected virtual void OnBarBrushChanged(PropertyEventArgs<Brush> args) { }
+        protected virtual void OnOrientationChanged(PropertyEventArgs<Orientation> args)
+        {
+        }
+
+        protected virtual void OnValueChanged(PropertyEventArgs<int> args)
+        {
+        }
+
+        protected virtual void OnMaximumChanged(PropertyEventArgs<int> args)
+        {
+        }
+
+        protected virtual void OnBarBrushChanged(PropertyEventArgs<Brush> args)
+        {
+        }
 
         public event PropertyChangedDelegate<Orientation> OrientationChanged;
 

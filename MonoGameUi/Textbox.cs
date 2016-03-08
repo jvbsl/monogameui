@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
+﻿using System;
 using System.Linq;
+using engenious;
+using engenious.Graphics;
+using engenious.Input;
 
 namespace MonoGameUi
 {
@@ -86,7 +86,8 @@ namespace MonoGameUi
         protected override void OnKeyTextPress(KeyTextEventArgs args)
         {
             // Ignorieren, wenn kein Fokus
-            if (Focused != TreeState.Active) return;
+            if (Focused != TreeState.Active)
+                return;
 
             // Steuerzeichen ignorieren
             if (args.Character == '\b' || args.Character == '\t' || args.Character == '\n' || args.Character == '\r')
@@ -121,7 +122,8 @@ namespace MonoGameUi
         protected override void OnKeyPress(KeyEventArgs args)
         {
             // Ignorieren, wenn kein Fokus
-            if (Focused != TreeState.Active) return;
+            if (Focused != TreeState.Active)
+                return;
 
             // Linke Pfeiltaste
             if (args.Key == Keys.Left)
@@ -129,7 +131,8 @@ namespace MonoGameUi
                 if (args.Ctrl)
                 {
                     int x = Math.Min(CursorPosition - 1, Text.Length - 1);
-                    while (x > 0 && Text[x] != ' ') x--;
+                    while (x > 0 && Text[x] != ' ')
+                        x--;
                     CursorPosition = x;
                 }
                 else
@@ -149,7 +152,8 @@ namespace MonoGameUi
                 if (args.Ctrl)
                 {
                     int x = CursorPosition;
-                    while (x < Text.Length && Text[x] != ' ') x++;
+                    while (x < Text.Length && Text[x] != ' ')
+                        x++;
                     CursorPosition = Math.Min(x + 1, Text.Length);
                 }
                 else
@@ -235,8 +239,10 @@ namespace MonoGameUi
                 int to = Math.Max(SelectionStart, CursorPosition);
 
                 // Selektion kopieren
-                if (from == to) System.Windows.Forms.Clipboard.Clear();
-                else System.Windows.Forms.Clipboard.SetText(Text.Substring(from, to - from));
+                if (from == to)
+                    System.Windows.Forms.Clipboard.Clear();
+                else
+                    System.Windows.Forms.Clipboard.SetText(Text.Substring(from, to - from));
 
                 args.Handled = true;
             }
@@ -248,8 +254,10 @@ namespace MonoGameUi
                 int to = Math.Max(SelectionStart, CursorPosition);
 
                 // Selektion ausschneiden
-                if (from == to) System.Windows.Forms.Clipboard.Clear();
-                else System.Windows.Forms.Clipboard.SetText(Text.Substring(from, to - from));
+                if (from == to)
+                    System.Windows.Forms.Clipboard.Clear();
+                else
+                    System.Windows.Forms.Clipboard.SetText(Text.Substring(from, to - from));
 
                 CursorPosition = from;
                 SelectionStart = from;
@@ -290,24 +298,24 @@ namespace MonoGameUi
         }
 
         Keys[] ignoreKeys =
-        {
-            Keys.Escape,
-            Keys.Tab,
-            Keys.F1,
-            Keys.F2,
-            Keys.F3,
-            Keys.F4,
-            Keys.F5,
-            Keys.F6,
-            Keys.F7,
-            Keys.F8,
-            Keys.F9,
-            Keys.F10,
-            Keys.F11,
-            Keys.F12,
-            Keys.End,
-            Keys.Pause
-        };
+            {
+                Keys.Escape,
+                Keys.Tab,
+                Keys.F1,
+                Keys.F2,
+                Keys.F3,
+                Keys.F4,
+                Keys.F5,
+                Keys.F6,
+                Keys.F7,
+                Keys.F8,
+                Keys.F9,
+                Keys.F10,
+                Keys.F11,
+                Keys.F12,
+                Keys.End,
+                Keys.Pause
+            };
     }
 
 

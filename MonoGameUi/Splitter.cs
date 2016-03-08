@@ -1,6 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+﻿using engenious;
+using engenious.Graphics;
+using engenious.Input;
+
 
 namespace MonoGameUi
 {
@@ -302,7 +303,8 @@ namespace MonoGameUi
                 }
 
                 // oberer / linker Control-Rand
-                if (result < 0) result = 0;
+                if (result < 0)
+                    result = 0;
 
                 return result;
             }
@@ -338,7 +340,8 @@ namespace MonoGameUi
 
         public override Point GetExpectedSize(Point available)
         {
-            if (!Visible) return Point.Zero;
+            if (!Visible)
+                return Point.Zero;
             return GetMaxClientSize(available) + Borders;
         }
 
@@ -431,8 +434,8 @@ namespace MonoGameUi
             if (Orientation == Orientation.Horizontal && SplitterBrushHorizontal != null)
             {
                 Rectangle area = new Rectangle(
-                    backgroundArea.X + ActualSplitterPosition, backgroundArea.Y,
-                    SplitterSize, backgroundArea.Height);
+                                     backgroundArea.X + ActualSplitterPosition, backgroundArea.Y,
+                                     SplitterSize, backgroundArea.Height);
                 SplitterBrushHorizontal.Draw(batch, area, alpha);
             }
 
@@ -440,8 +443,8 @@ namespace MonoGameUi
             if (Orientation == Orientation.Vertical && SplitterBrushVertical != null)
             {
                 Rectangle area = new Rectangle(
-                    backgroundArea.X, backgroundArea.Y + ActualSplitterPosition,
-                    backgroundArea.Width, SplitterSize);
+                                     backgroundArea.X, backgroundArea.Y + ActualSplitterPosition,
+                                     backgroundArea.Width, SplitterSize);
                 SplitterBrushVertical.Draw(batch, area, alpha);
             }
         }
@@ -453,16 +456,16 @@ namespace MonoGameUi
                 if (Orientation == Orientation.Horizontal)
                 {
                     Rectangle area = new Rectangle(
-                        contentArea.X + ActualSplitterPosition, contentArea.Y,
-                        SplitterSize, contentArea.Height);
+                                         contentArea.X + ActualSplitterPosition, contentArea.Y,
+                                         SplitterSize, contentArea.Height);
                     Skin.Current.FocusFrameBrush.Draw(batch, area, alpha);
                 }
 
                 if (Orientation == Orientation.Vertical)
                 {
                     Rectangle area = new Rectangle(
-                        contentArea.X, contentArea.Y + ActualSplitterPosition,
-                        contentArea.Width, SplitterSize);
+                                         contentArea.X, contentArea.Y + ActualSplitterPosition,
+                                         contentArea.Width, SplitterSize);
                     Skin.Current.FocusFrameBrush.Draw(batch, area, alpha);
                 }
             }
@@ -502,21 +505,37 @@ namespace MonoGameUi
             base.OnKeyPress(args);
         }
 
-        protected virtual void OnSlot1Changed(PropertyEventArgs<Control> args) { }
+        protected virtual void OnSlot1Changed(PropertyEventArgs<Control> args)
+        {
+        }
 
-        protected virtual void OnSlot1MinSizeChanged(PropertyEventArgs<int?> args) { }
+        protected virtual void OnSlot1MinSizeChanged(PropertyEventArgs<int?> args)
+        {
+        }
 
-        protected virtual void OnSlot1MaxSizeChanged(PropertyEventArgs<int?> args) { }
+        protected virtual void OnSlot1MaxSizeChanged(PropertyEventArgs<int?> args)
+        {
+        }
 
-        protected virtual void OnSlot2Changed(PropertyEventArgs<Control> args) { }
+        protected virtual void OnSlot2Changed(PropertyEventArgs<Control> args)
+        {
+        }
 
-        protected virtual void OnSlot2MinSizeChanged(PropertyEventArgs<int?> args) { }
+        protected virtual void OnSlot2MinSizeChanged(PropertyEventArgs<int?> args)
+        {
+        }
 
-        protected virtual void OnSlot2MaxSizeChanged(PropertyEventArgs<int?> args) { }
+        protected virtual void OnSlot2MaxSizeChanged(PropertyEventArgs<int?> args)
+        {
+        }
 
-        protected virtual void OnSplitterPositionChanged(PropertyEventArgs<int> args) { }
+        protected virtual void OnSplitterPositionChanged(PropertyEventArgs<int> args)
+        {
+        }
 
-        protected virtual void OnSplitterSizeChanged(PropertyEventArgs<int> args) { }
+        protected virtual void OnSplitterSizeChanged(PropertyEventArgs<int> args)
+        {
+        }
 
         /// <summary>
         /// Event signalisiert eine Änderung des Controls in Slot 1.

@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
+using engenious;
 
 namespace MonoGameUi
 {
@@ -9,14 +9,19 @@ namespace MonoGameUi
     public abstract class Transition
     {
         public TimeSpan Current { get; private set; }
+
         public TimeSpan Delay { get; private set; }
+
         public TimeSpan Time { get; private set; }
+
         public Control Control { get; private set; }
+
         public Func<float, float> Curve { get; private set; }
 
-        public Transition(Control control, Func<float, float> curve, TimeSpan time) :
-            this(control, curve, time, TimeSpan.Zero)
-        { }
+        public Transition(Control control, Func<float, float> curve, TimeSpan time)
+            : this(control, curve, time, TimeSpan.Zero)
+        {
+        }
 
         /// <summary>
         /// Erstellt eine neue Transition für das angegebene Control.
@@ -45,11 +50,12 @@ namespace MonoGameUi
             Current += gameTime.ElapsedGameTime;
 
             // Vorlaufzeit (Delay)
-            if (Current < Delay) return true;
+            if (Current < Delay)
+                return true;
 
             // Funktionseingang ermitteln
             float position = Math.Max(0, Math.Min(1, (float)(
-                (Current.TotalMilliseconds - Delay.TotalMilliseconds) / Time.TotalMilliseconds)));
+                                         (Current.TotalMilliseconds - Delay.TotalMilliseconds) / Time.TotalMilliseconds)));
             float value = Math.Max(0, Math.Min(1, Curve(position)));
 
             // Auf Control anwenden
@@ -105,5 +111,5 @@ namespace MonoGameUi
         #endregion
     }
 
-    public delegate void TransitionDelegate(Transition sender, Control control);
+    public delegate void TransitionDelegate(Transition sender,Control control);
 }

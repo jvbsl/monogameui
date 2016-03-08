@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System.Linq;
+﻿using System.Linq;
+using engenious;
+using engenious.Graphics;
 
 namespace MonoGameUi
 {
@@ -176,7 +176,8 @@ namespace MonoGameUi
 
             if (nextSelected != null)
                 SelectedItem = nextSelected.Tag as T;
-            else SelectedItem = null;
+            else
+                SelectedItem = null;
         }
     }
 }

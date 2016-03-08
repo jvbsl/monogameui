@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.Xna.Framework;
+using engenious;
 
 namespace MonoGameUi
 {
@@ -37,7 +37,8 @@ namespace MonoGameUi
             }
         }
 
-        public StackPanel(IScreenManager manager) : base(manager)
+        public StackPanel(IScreenManager manager)
+            : base(manager)
         {
             ApplySkin(typeof(StackPanel));
         }
@@ -94,7 +95,9 @@ namespace MonoGameUi
         /// Signialisiert die Veränderung der Orientation-Eigenschaft.
         /// </summary>
         /// <param name="args"></param>
-        protected virtual void OnOrientationChanged(PropertyEventArgs<Orientation> args) { }
+        protected virtual void OnOrientationChanged(PropertyEventArgs<Orientation> args)
+        {
+        }
 
         public event PropertyChangedDelegate<Orientation> OrientationChanged;
     }

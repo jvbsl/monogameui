@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
+using engenious;
 
 namespace MonoGameUi
 {
@@ -37,7 +37,8 @@ namespace MonoGameUi
         public static Rectangle Transform(this Rectangle rectangle, Matrix transform)
         {
             // In Punkte umwandeln
-            Vector2[] p = new[] {
+            Vector2[] p = new[]
+            {
                 new Vector2(rectangle.Left, rectangle.Top),
                 new Vector2(rectangle.Right, rectangle.Bottom)
             };
@@ -62,7 +63,7 @@ namespace MonoGameUi
         public static bool Intersects(this Rectangle rectangle, Point point)
         {
             return point.X >= rectangle.Left && point.X < rectangle.Right &&
-                point.Y >= rectangle.Top && point.Y < rectangle.Bottom;
+            point.Y >= rectangle.Top && point.Y < rectangle.Bottom;
         }
     }
 }

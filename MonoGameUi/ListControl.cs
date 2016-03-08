@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using engenious.Input;
 
 namespace MonoGameUi
 {
@@ -98,7 +98,8 @@ namespace MonoGameUi
         protected override void OnKeyPress(KeyEventArgs args)
         {
             // Nur reagieren, wenn der Fokus gesetzt ist
-            if (Focused == TreeState.None) return;
+            if (Focused == TreeState.None)
+                return;
 
             switch (args.Key)
             {
@@ -165,9 +166,13 @@ namespace MonoGameUi
             }
         }
 
-        protected virtual void OnSelectedItemChanged(SelectionEventArgs<T> args) { }
+        protected virtual void OnSelectedItemChanged(SelectionEventArgs<T> args)
+        {
+        }
 
-        protected virtual void OnSelectedItemBrushChanged(PropertyEventArgs<Brush> args) { }
+        protected virtual void OnSelectedItemBrushChanged(PropertyEventArgs<Brush> args)
+        {
+        }
 
         public event SelectionDelegate<T> SelectedItemChanged;
 

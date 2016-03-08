@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework;
 using MonoGameUi;
 
 namespace SampleClient.Screens
 {
     class TabScreen : Screen
     {
-        public TabScreen(IScreenManager manager) : base(manager)
+        public TabScreen(IScreenManager manager)
+            : base(manager)
         {
             //Create Tab Pages
             TabPage tabPage = new TabPage(manager, "Tab 1");

@@ -1,5 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using engenious;
+using engenious.Graphics;
+
 
 namespace MonoGameUi
 {
@@ -68,11 +69,15 @@ namespace MonoGameUi
             }
         }
 
-        public BorderBrush(Color backgroundColor) :
-            this(backgroundColor, LineType.None, Color.Transparent) { }
+        public BorderBrush(Color backgroundColor)
+            : this(backgroundColor, LineType.None, Color.Transparent)
+        {
+        }
 
         public BorderBrush(LineType lineType, Color lineColor, int lineWidth = 1)
-            : this(Color.Transparent, lineType, lineColor, lineWidth) { }
+            : this(Color.Transparent, lineType, lineColor, lineWidth)
+        {
+        }
 
         public BorderBrush(Color backgroundColor, LineType lineType, Color lineColor, int lineWidth = 1)
         {

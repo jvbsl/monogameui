@@ -1,13 +1,14 @@
 ﻿using MonoGameUi;
 using System;
-using Microsoft.Xna.Framework;
 using SampleClient.Screens;
+using engenious;
 
 namespace SampleClient
 {
     internal class ScreenComponent : BaseScreenComponent
     {
-        public ScreenComponent(Game game) : base(game)
+        public ScreenComponent(Game game)
+            : base(game)
         {
         }
 

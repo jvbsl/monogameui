@@ -1,5 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using engenious;
+using engenious.Graphics;
+
 
 namespace MonoGameUi
 {
@@ -31,7 +32,8 @@ namespace MonoGameUi
         public event CheckedChangedDelegate CheckedChanged;
 
 
-        public Checkbox(IScreenManager manager) : base(manager)
+        public Checkbox(IScreenManager manager)
+            : base(manager)
         {
             CanFocus = true;
             TabStop = true;
@@ -48,10 +50,10 @@ namespace MonoGameUi
 
             BoxBrush.Draw(batch, contentArea, alpha);
             InnerBoxBrush.Draw(batch, new Rectangle(contentArea.X + innerDistanceX, contentArea.Y + innerDistanceY,
-                contentArea.Width - innerDistanceX * 2, contentArea.Height - innerDistanceY * 2), alpha);
+                    contentArea.Width - innerDistanceX * 2, contentArea.Height - innerDistanceY * 2), alpha);
             if (Checked)
                 HookBrush.Draw(batch, new Rectangle(contentArea.X + hookDistanceX, contentArea.Y + +hookDistanceY,
-                    contentArea.Width - hookDistanceX * 2, contentArea.Height - hookDistanceY * 2), alpha);
+                        contentArea.Width - hookDistanceX * 2, contentArea.Height - hookDistanceY * 2), alpha);
         }
 
         protected override void OnLeftMouseClick(MouseEventArgs args)
@@ -61,7 +63,7 @@ namespace MonoGameUi
 
         protected override void OnKeyDown(KeyEventArgs args)
         {
-            if (Focused == TreeState.Active && args.Key == Microsoft.Xna.Framework.Input.Keys.Enter)
+            if (Focused == TreeState.Active && args.Key == engenious.Input.Keys.Enter)
                 Checked = !Checked;
         }
 

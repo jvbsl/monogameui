@@ -1,9 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Audio;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using engenious;
+using engenious.Graphics;
 
 namespace MonoGameUi
 {
@@ -24,14 +23,17 @@ namespace MonoGameUi
 
         private Border padding = Border.All(0);
 
-        private SoundEffect clickSound = null;
-
-        private SoundEffect hoverSound = null;
-
         /// <summary>
         /// Referenz auf den aktuellen Screen Manager
         /// </summary>
         public IScreenManager ScreenManager { get; private set; }
+
+        //TODO: sound not implemented yet
+        /*private SoundEffect clickSound = null;
+
+        private SoundEffect hoverSound = null;
+
+
 
         /// <summary>
         /// Sound der beim Klicken abgespielt wird
@@ -67,7 +69,7 @@ namespace MonoGameUi
                     hoverSound = value;
                 }
             }
-        }
+        }*/
 
         /// <summary>
         /// Standard-Background des Controls
@@ -208,7 +210,7 @@ namespace MonoGameUi
 
             // StyleSkin-Loader
             if (!string.IsNullOrEmpty(Style) && // Nur wenn der Style gesetzt ist
-                type == GetType() &&            // Nur wenn der Type == dem Type des Controls entspricht (bedeutet der letzte Aufruf auf ApplySkin)
+                type == GetType() && // Nur wenn der Type == dem Type des Controls entspricht (bedeutet der letzte Aufruf auf ApplySkin)
                 Skin.Current != null &&
                 Skin.Current.StyleSkins != null &&
                 Skin.Current.StyleSkins.ContainsKey(Style))
@@ -225,7 +227,9 @@ namespace MonoGameUi
                 child.Update(gameTime);
         }
 
-        protected virtual void OnUpdate(GameTime gameTime) { }
+        protected virtual void OnUpdate(GameTime gameTime)
+        {
+        }
 
         public void PreDraw(GameTime gameTime)
         {
@@ -234,7 +238,9 @@ namespace MonoGameUi
                 child.PreDraw(gameTime);
         }
 
-        protected virtual void OnPreDraw(GameTime gameTime) { }
+        protected virtual void OnPreDraw(GameTime gameTime)
+        {
+        }
 
         /// <summary>
         /// Zeichenauruf für das Control (SpriteBatch ist bereits aktiviert)
@@ -243,7 +249,8 @@ namespace MonoGameUi
         /// <param name="gameTime">Vergangene Spielzeit</param>
         public void Draw(SpriteBatch batch, Rectangle renderMask, GameTime gameTime)
         {
-            if (!Visible) return;
+            if (!Visible)
+                return;
 
             // Controlgröße ermitteln
             Rectangle controlArea = new Rectangle(AbsolutePosition, ActualSize);
@@ -276,18 +283,18 @@ namespace MonoGameUi
         {
             // Background-Bereich ermitteln und zeichnen
             Rectangle controlWithMargin = new Rectangle(
-               controlArea.X + Margin.Left,
-               controlArea.Y + Margin.Top,
-               controlArea.Width - Margin.Left - Margin.Right,
-               controlArea.Height - Margin.Bottom - Margin.Top);
+                                              controlArea.X + Margin.Left,
+                                              controlArea.Y + Margin.Top,
+                                              controlArea.Width - Margin.Left - Margin.Right,
+                                              controlArea.Height - Margin.Bottom - Margin.Top);
             OnDrawBackground(batch, controlWithMargin, gameTime, AbsoluteAlpha);
 
             // Content-Bereich ermitteln und zeichnen
             Rectangle controlWithPadding = new Rectangle(
-                controlWithMargin.X + Padding.Left,
-                controlWithMargin.Y + Padding.Top,
-                controlWithMargin.Width - Padding.Left - Padding.Right,
-                controlWithMargin.Height - Padding.Bottom - Padding.Top);
+                                               controlWithMargin.X + Padding.Left,
+                                               controlWithMargin.Y + Padding.Top,
+                                               controlWithMargin.Width - Padding.Left - Padding.Right,
+                                               controlWithMargin.Height - Padding.Bottom - Padding.Top);
             OnDrawContent(batch, controlWithPadding, gameTime, AbsoluteAlpha);
 
             // Fokus-Frame
@@ -371,7 +378,8 @@ namespace MonoGameUi
 
                     enabled = value;
                     InvalidateDrawing();
-                    if (!enabled) Unfocus();
+                    if (!enabled)
+                        Unfocus();
 
                     OnEnableChanged(args);
                     if (EnableChanged != null)
@@ -416,7 +424,8 @@ namespace MonoGameUi
                     visible = value;
                     InvalidateDimensions();
                     InvalidateDrawing();
-                    if (!visible) Unfocus();
+                    if (!visible)
+                        Unfocus();
 
                     OnVisibleChanged(args);
                     if (VisibleChanged != null)
@@ -533,23 +542,33 @@ namespace MonoGameUi
         /// Ein neues Control wurde in die Children-Liste eingefügt.
         /// </summary>
         /// <param name="args"></param>
-        protected virtual void OnInsertControl(CollectionEventArgs args) { }
+        protected virtual void OnInsertControl(CollectionEventArgs args)
+        {
+        }
 
         /// <summary>
         /// Ein Control wurde aus der Children-Liste entfernt.
         /// </summary>
         /// <param name="args"></param>
-        protected virtual void OnRemoveControl(CollectionEventArgs args) { }
+        protected virtual void OnRemoveControl(CollectionEventArgs args)
+        {
+        }
 
         /// <summary>
         /// Der Parent dieses Controls hat sich geändert.
         /// </summary>
         /// <param name="args"></param>
-        protected virtual void OnParentChanged(PropertyEventArgs<Control> args) { }
+        protected virtual void OnParentChanged(PropertyEventArgs<Control> args)
+        {
+        }
 
-        protected virtual void OnEnableChanged(PropertyEventArgs<bool> args) { }
+        protected virtual void OnEnableChanged(PropertyEventArgs<bool> args)
+        {
+        }
 
-        protected virtual void OnVisibleChanged(PropertyEventArgs<bool> args) { }
+        protected virtual void OnVisibleChanged(PropertyEventArgs<bool> args)
+        {
+        }
 
         /// <summary>
         /// Event das die Änderung des Parents signalisiert.
@@ -852,7 +871,8 @@ namespace MonoGameUi
         /// <returns>Benötigte Platz inklusive allen Rändern</returns>
         public virtual Point GetExpectedSize(Point available)
         {
-            if (!Visible) return Point.Zero;
+            if (!Visible)
+                return Point.Zero;
 
             Point result = GetMinClientSize(available);
             Point client = GetMaxClientSize(available);
@@ -954,8 +974,8 @@ namespace MonoGameUi
         protected void SetDimension(Point actualSize, Point containerSize)
         {
             var size = new Point(
-                Math.Min(containerSize.X, HorizontalAlignment == HorizontalAlignment.Stretch ? containerSize.X : actualSize.X),
-                Math.Min(containerSize.Y, VerticalAlignment == VerticalAlignment.Stretch ? containerSize.Y : actualSize.Y));
+                           Math.Min(containerSize.X, HorizontalAlignment == HorizontalAlignment.Stretch ? containerSize.X : actualSize.X),
+                           Math.Min(containerSize.Y, VerticalAlignment == VerticalAlignment.Stretch ? containerSize.Y : actualSize.Y));
 
             Point minSize = GetMinClientSize(containerSize) + Borders;
             Point maxSize = GetMaxClientSize(containerSize) + Borders;
@@ -1139,8 +1159,8 @@ namespace MonoGameUi
                         HoveredChanged(this, args);
 
                     // Sound abspielen
-                    if (hoverSound != null && hovered == TreeState.Active && args.OldValue != TreeState.Passive)
-                        hoverSound.Play();
+                    //if (hoverSound != null && hovered == TreeState.Active && args.OldValue != TreeState.Passive)
+                    //    hoverSound.Play();
                 }
             }
         }
@@ -1211,7 +1231,8 @@ namespace MonoGameUi
 
             // Hover-State neu setzen
             TreeState newState = TreeState.None;
-            if (hovered) newState = passive ? TreeState.Passive : TreeState.Active;
+            if (hovered)
+                newState = passive ? TreeState.Passive : TreeState.Active;
             Hovered = newState;
 
             return hovered;
@@ -1220,7 +1241,8 @@ namespace MonoGameUi
         internal void InternalLeftMouseDown(MouseEventArgs args)
         {
             // Ignorieren, falls nicht gehovered
-            if (Hovered == TreeState.None || !Visible || !Enabled) return;
+            if (Hovered == TreeState.None || !Visible || !Enabled)
+                return;
 
             // Fokusieren
             Focus();
@@ -1233,7 +1255,8 @@ namespace MonoGameUi
             {
                 args.LocalPosition = CalculateLocalPosition(args.GlobalPosition, child);
                 child.InternalLeftMouseDown(args);
-                if (args.Handled) break;
+                if (args.Handled)
+                    break;
             }
 
             // Lokales Events
@@ -1265,14 +1288,16 @@ namespace MonoGameUi
         internal void InternalLeftMouseClick(MouseEventArgs args)
         {
             // Ignorieren, falls nicht gehovered
-            if (Hovered == TreeState.None || !Visible || !Enabled) return;
+            if (Hovered == TreeState.None || !Visible || !Enabled)
+                return;
 
             // Children first (Order by Z-Order)
             foreach (var child in Children.InZOrder())
             {
                 args.LocalPosition = CalculateLocalPosition(args.GlobalPosition, child);
                 child.InternalLeftMouseClick(args);
-                if (args.Handled) break;
+                if (args.Handled)
+                    break;
             }
 
             // Lokales Events
@@ -1285,14 +1310,15 @@ namespace MonoGameUi
             }
 
             // Click-Sound abspielen
-            if (clickSound != null)
-                clickSound.Play();
+            //if (clickSound != null)
+            //    clickSound.Play();
         }
 
         internal void InternalRightMouseDown(MouseEventArgs args)
         {
             // Ignorieren, falls nicht gehovered
-            if (Hovered == TreeState.None || !Visible || !Enabled) return;
+            if (Hovered == TreeState.None || !Visible || !Enabled)
+                return;
 
             Focus();
 
@@ -1301,7 +1327,8 @@ namespace MonoGameUi
             {
                 args.LocalPosition = CalculateLocalPosition(args.GlobalPosition, child);
                 child.InternalRightMouseDown(args);
-                if (args.Handled) break;
+                if (args.Handled)
+                    break;
             }
 
             // Lokales Events
@@ -1333,14 +1360,16 @@ namespace MonoGameUi
         internal void InternalRightMouseClick(MouseEventArgs args)
         {
             // Ignorieren, falls nicht gehovered
-            if (Hovered == TreeState.None || !Visible || !Enabled) return;
+            if (Hovered == TreeState.None || !Visible || !Enabled)
+                return;
 
             // Children first (Order by Z-Order)
             foreach (var child in Children.InZOrder())
             {
                 args.LocalPosition = CalculateLocalPosition(args.GlobalPosition, child);
                 child.InternalRightMouseClick(args);
-                if (args.Handled) break;
+                if (args.Handled)
+                    break;
             }
 
             // Lokales Events
@@ -1356,14 +1385,16 @@ namespace MonoGameUi
         internal void InternalMouseScroll(MouseScrollEventArgs args)
         {
             // Ignorieren, falls nicht gehovered
-            if (Hovered == TreeState.None || !Visible || !Enabled) return;
+            if (Hovered == TreeState.None || !Visible || !Enabled)
+                return;
 
             // Children first (Order by Z-Order)
             foreach (var child in Children.InZOrder())
             {
                 args.LocalPosition = CalculateLocalPosition(args.GlobalPosition, child);
                 child.InternalMouseScroll(args);
-                if (args.Handled) break;
+                if (args.Handled)
+                    break;
             }
 
             // Lokales Events
@@ -1380,32 +1411,54 @@ namespace MonoGameUi
         {
             Point absolutePosition = control.AbsolutePosition;
             Vector2 local = Vector2.Transform(
-                new Vector2(global.X - absolutePosition.X, global.Y - absolutePosition.Y),
-                Matrix.Invert(control.AbsoluteTransformation));
+                                new Vector2(global.X - absolutePosition.X, global.Y - absolutePosition.Y),
+                                Matrix.Invert(control.AbsoluteTransformation));
             return new Point((int)local.X, (int)local.Y);
         }
 
-        protected virtual void OnMouseEnter(MouseEventArgs args) { }
+        protected virtual void OnMouseEnter(MouseEventArgs args)
+        {
+        }
 
-        protected virtual void OnMouseLeave(MouseEventArgs args) { }
+        protected virtual void OnMouseLeave(MouseEventArgs args)
+        {
+        }
 
-        protected virtual void OnMouseMove(MouseEventArgs args) { }
+        protected virtual void OnMouseMove(MouseEventArgs args)
+        {
+        }
 
-        protected virtual void OnLeftMouseDown(MouseEventArgs args) { }
+        protected virtual void OnLeftMouseDown(MouseEventArgs args)
+        {
+        }
 
-        protected virtual void OnLeftMouseUp(MouseEventArgs args) { }
+        protected virtual void OnLeftMouseUp(MouseEventArgs args)
+        {
+        }
 
-        protected virtual void OnLeftMouseClick(MouseEventArgs args) { }
+        protected virtual void OnLeftMouseClick(MouseEventArgs args)
+        {
+        }
 
-        protected virtual void OnRightMouseDown(MouseEventArgs args) { }
+        protected virtual void OnRightMouseDown(MouseEventArgs args)
+        {
+        }
 
-        protected virtual void OnRightMouseUp(MouseEventArgs args) { }
+        protected virtual void OnRightMouseUp(MouseEventArgs args)
+        {
+        }
 
-        protected virtual void OnRightMouseClick(MouseEventArgs args) { }
+        protected virtual void OnRightMouseClick(MouseEventArgs args)
+        {
+        }
 
-        protected virtual void OnMouseScroll(MouseScrollEventArgs args) { }
+        protected virtual void OnMouseScroll(MouseScrollEventArgs args)
+        {
+        }
 
-        protected virtual void OnHoveredChanged(PropertyEventArgs<TreeState> args) { }
+        protected virtual void OnHoveredChanged(PropertyEventArgs<TreeState> args)
+        {
+        }
 
         public event MouseEventDelegate MouseEnter;
 
@@ -1509,13 +1562,21 @@ namespace MonoGameUi
             }
         }
 
-        protected virtual void OnKeyDown(KeyEventArgs args) { }
+        protected virtual void OnKeyDown(KeyEventArgs args)
+        {
+        }
 
-        protected virtual void OnKeyUp(KeyEventArgs args) { }
+        protected virtual void OnKeyUp(KeyEventArgs args)
+        {
+        }
 
-        protected virtual void OnKeyPress(KeyEventArgs args) { }
+        protected virtual void OnKeyPress(KeyEventArgs args)
+        {
+        }
 
-        protected virtual void OnKeyTextPress(KeyTextEventArgs args) { }
+        protected virtual void OnKeyTextPress(KeyTextEventArgs args)
+        {
+        }
 
         public event KeyEventDelegate KeyDown;
 
@@ -1581,7 +1642,8 @@ namespace MonoGameUi
                     };
 
                     canFocus = value;
-                    if (!canFocus) Unfocus();
+                    if (!canFocus)
+                        Unfocus();
 
                     OnCanFocusChanged(args);
                     if (CanFocusChanged != null)
@@ -1623,7 +1685,8 @@ namespace MonoGameUi
             get
             {
                 // Aktuelles Control ist fokusiert
-                if (focused) return TreeState.Active;
+                if (focused)
+                    return TreeState.Active;
 
                 // Schauen, ob irgend ein Child fokusiert ist
                 foreach (var child in Children.InZOrder())
@@ -1727,7 +1790,8 @@ namespace MonoGameUi
         internal bool InternalTabbedForward()
         {
             // Unsichtbare Elemente können nicht fokusiert werden
-            if (!Visible) return false;
+            if (!Visible)
+                return false;
 
             bool findFocused = Focused != TreeState.None;
 
@@ -1739,7 +1803,7 @@ namespace MonoGameUi
 
             // Keine Selektion -> Erstes Element selektieren
             else if (Focused == TreeState.None && CanFocus &&
-                TabStop && AbsoluteEnabled && AbsoluteVisible)
+                     TabStop && AbsoluteEnabled && AbsoluteVisible)
             {
                 Focus();
                 return true;
@@ -1795,17 +1859,29 @@ namespace MonoGameUi
             return false;
         }
 
-        protected virtual void OnTabStopChanged(PropertyEventArgs<bool> args) { }
+        protected virtual void OnTabStopChanged(PropertyEventArgs<bool> args)
+        {
+        }
 
-        protected virtual void OnCanFocusChanged(PropertyEventArgs<bool> args) { }
+        protected virtual void OnCanFocusChanged(PropertyEventArgs<bool> args)
+        {
+        }
 
-        protected virtual void OnTabOrderChanged(PropertyEventArgs<int> args) { }
+        protected virtual void OnTabOrderChanged(PropertyEventArgs<int> args)
+        {
+        }
 
-        protected virtual void OnZOrderChanged(PropertyEventArgs<int> args) { }
+        protected virtual void OnZOrderChanged(PropertyEventArgs<int> args)
+        {
+        }
 
-        protected virtual void OnGotFocus(EventArgs args) { }
+        protected virtual void OnGotFocus(EventArgs args)
+        {
+        }
 
-        protected virtual void OnLostFocus(EventArgs args) { }
+        protected virtual void OnLostFocus(EventArgs args)
+        {
+        }
 
         public event PropertyChangedDelegate<bool> TabStopChanged;
 

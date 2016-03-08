@@ -1,7 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
+﻿using System;
+using engenious.Input;
 
 namespace MonoGameUi
 {
@@ -48,7 +46,9 @@ namespace MonoGameUi
             args.Handled = true;
         }
 
-        protected virtual void OnExecuted(EventArgs args) { }
+        protected virtual void OnExecuted(EventArgs args)
+        {
+        }
 
         public event EventDelegate Executed;
 

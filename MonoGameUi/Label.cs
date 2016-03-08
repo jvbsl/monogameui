@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using engenious;
+using engenious.Graphics;
 
 namespace MonoGameUi
 {
@@ -125,8 +125,8 @@ namespace MonoGameUi
             }
         }
 
-        public Label(IScreenManager manager, string style = "") :
-            base(manager, style)
+        public Label(IScreenManager manager, string style = "")
+            : base(manager, style)
         {
             ApplySkin(typeof(Label));
         }
@@ -134,7 +134,8 @@ namespace MonoGameUi
         protected override void OnDrawContent(SpriteBatch batch, Rectangle area, GameTime gameTime, float alpha)
         {
             // Rahmenbedingungen fürs Rendern checken
-            if (Font == null) return;
+            if (Font == null)
+                return;
 
             Vector2 offset = new Vector2(area.X, area.Y);
 
@@ -189,7 +190,8 @@ namespace MonoGameUi
 
         public override Point CalculcateRequiredClientSpace(Point available)
         {
-            if (Font == null) return Point.Zero;
+            if (Font == null)
+                return Point.Zero;
 
             AnalyzeText(available);
 
@@ -222,7 +224,8 @@ namespace MonoGameUi
         private void AnalyzeText(Point available)
         {
             lines.Clear();
-            if (Font == null) return;
+            if (Font == null)
+                return;
 
             StringBuilder sb = new StringBuilder();
 

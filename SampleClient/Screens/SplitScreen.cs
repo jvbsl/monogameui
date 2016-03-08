@@ -1,21 +1,25 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using MonoGameUi;
 using System.IO;
+using engenious.Graphics;
+using engenious;
 
 namespace SampleClient.Screens
 {
     internal class SplitScreen : Screen
     {
-        public SplitScreen(IScreenManager manager) : base(manager)
+        public SplitScreen(IScreenManager manager)
+            : base(manager)
         {
             Background = new BorderBrush(Color.Gray);                       //Hintergrundfarbe festlegen
 
             Button backButton = Button.TextButton(manager, "Back");             //Neuen TextButton erzeugen
             backButton.HorizontalAlignment = HorizontalAlignment.Left;          //Links
             backButton.VerticalAlignment = VerticalAlignment.Top;               //Oben
-            backButton.LeftMouseClick += (s, e) => { manager.NavigateBack(); }; //KlickEvent festlegen
+            backButton.LeftMouseClick += (s, e) =>
+            {
+                manager.NavigateBack();
+            }; //KlickEvent festlegen
             Controls.Add(backButton);                                           //Button zum Screen hinzufügen
 
 
@@ -85,7 +89,8 @@ namespace SampleClient.Screens
            
 
             Button clearCombobox = Button.TextButton(manager, "Clear Combobox");
-            clearCombobox.LeftMouseClick += (s, e) => {
+            clearCombobox.LeftMouseClick += (s, e) =>
+            {
                 combobox.Items.Clear();
                 list.Items.Clear();
             };
@@ -100,7 +105,10 @@ namespace SampleClient.Screens
                 Width = 150,
                 Height = 20,
             };
-            sliderHorizontal.ValueChanged += (value) => { labelSliderHorizontal.Text = "Value: " + value; }; //Event on Value Changed
+            sliderHorizontal.ValueChanged += (value) =>
+            {
+                labelSliderHorizontal.Text = "Value: " + value;
+            }; //Event on Value Changed
             panel.Controls.Add(sliderHorizontal);
             labelSliderHorizontal.Text = "Value: " + sliderHorizontal.Value;                                 //Set Text initially
             panel.Controls.Add(labelSliderHorizontal);
@@ -116,7 +124,10 @@ namespace SampleClient.Screens
                 Width = 20,
                 Orientation = Orientation.Vertical
             };
-            sliderVertical.ValueChanged += (value) => { labelSliderVertical.Text = "Value: " + value; };
+            sliderVertical.ValueChanged += (value) =>
+            {
+                labelSliderVertical.Text = "Value: " + value;
+            };
             panel.Controls.Add(sliderVertical);
             labelSliderVertical.Text = "Value: " + sliderVertical.Value;
             panel.Controls.Add(labelSliderVertical);

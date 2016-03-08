@@ -1,12 +1,12 @@
-﻿using Microsoft.Xna.Framework;
-using MonoGameUi;
-using Microsoft.Xna.Framework.Audio;
+﻿using MonoGameUi;
+using engenious;
 
 namespace SampleClient.Screens
 {
     internal class StartScreen : Screen
     {
-        public StartScreen(IScreenManager manager) : base(manager)
+        public StartScreen(IScreenManager manager)
+            : base(manager)
         {
             Background = new BorderBrush(Color.DarkRed);
 

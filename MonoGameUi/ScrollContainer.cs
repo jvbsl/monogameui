@@ -1,7 +1,7 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using engenious;
+using engenious.Graphics;
+using engenious.Input;
 
 namespace MonoGameUi
 {
@@ -346,7 +346,7 @@ namespace MonoGameUi
                     (HorizontalScrollbarVisible == true || VirtualSize.X > ActualClientSize.X))
                 {
                     Point backgroundSize = ActualSize -
-                        new Point(Margin.Left + Margin.Right, Margin.Top + Margin.Bottom);
+                                           new Point(Margin.Left + Margin.Right, Margin.Top + Margin.Bottom);
 
                     // Scrollbereich ermitteln
                     return new Rectangle(
@@ -402,14 +402,14 @@ namespace MonoGameUi
                     (verticalScrollbarVisible == true || VirtualSize.Y > ActualClientSize.Y))
                 {
                     Point backgroundSize = ActualSize -
-                        new Point(Margin.Left + Margin.Right, Margin.Top + Margin.Bottom);
+                                           new Point(Margin.Left + Margin.Right, Margin.Top + Margin.Bottom);
 
                     // Scrollbereich ermitteln
                     return new Rectangle(
-                            backgroundSize.X - ScrollbarWidth,
-                            0,
-                            ScrollbarWidth,
-                            backgroundSize.Y - (HorizontalScrollbarEnabled && HorizontalScrollbarVisible != false ? ScrollbarWidth : 0));
+                        backgroundSize.X - ScrollbarWidth,
+                        0,
+                        ScrollbarWidth,
+                        backgroundSize.Y - (HorizontalScrollbarEnabled && HorizontalScrollbarVisible != false ? ScrollbarWidth : 0));
                 }
 
                 return null;
@@ -503,16 +503,18 @@ namespace MonoGameUi
         public override void SetActualSize(Point available)
         {
             Point scrollCut = new Point(
-                VerticalScrollbarEnabled && VerticalScrollbarVisible != false ? ScrollbarWidth : 0,
-                HorizontalScrollbarEnabled && HorizontalScrollbarVisible != false ? ScrollbarWidth : 0);
+                                  VerticalScrollbarEnabled && VerticalScrollbarVisible != false ? ScrollbarWidth : 0,
+                                  HorizontalScrollbarEnabled && HorizontalScrollbarVisible != false ? ScrollbarWidth : 0);
 
             Point minSize = GetExpectedSize(available);
             Point controlSize = new Point(Math.Min(minSize.X, available.X), Math.Min(minSize.Y, available.Y));
             SetDimension(controlSize, available);
 
             Point client = ActualClientSize - scrollCut;
-            if (HorizontalScrollbarEnabled) client.X = minSize.X;
-            if (VerticalScrollbarEnabled) client.Y = minSize.Y;
+            if (HorizontalScrollbarEnabled)
+                client.X = minSize.X;
+            if (VerticalScrollbarEnabled)
+                client.Y = minSize.Y;
 
             // Placement
             if (Content != null)
@@ -536,10 +538,10 @@ namespace MonoGameUi
             if (verticalScrollbarArea.HasValue && VerticalScrollbarBackground != null)
             {
                 Rectangle absoluteArea = new Rectangle(
-                    verticalScrollbarArea.Value.X + area.X,
-                    verticalScrollbarArea.Value.Y + area.Y,
-                    verticalScrollbarArea.Value.Width,
-                    verticalScrollbarArea.Value.Height);
+                                             verticalScrollbarArea.Value.X + area.X,
+                                             verticalScrollbarArea.Value.Y + area.Y,
+                                             verticalScrollbarArea.Value.Width,
+                                             verticalScrollbarArea.Value.Height);
                 VerticalScrollbarBackground.Draw(batch, absoluteArea, alpha);
             }
 
@@ -548,10 +550,10 @@ namespace MonoGameUi
             if (verticalScrollerArea.HasValue && VerticalScrollbarForeground != null)
             {
                 Rectangle absoluteArea = new Rectangle(
-                    verticalScrollerArea.Value.X + area.X,
-                    verticalScrollerArea.Value.Y + area.Y,
-                    verticalScrollerArea.Value.Width,
-                    verticalScrollerArea.Value.Height);
+                                             verticalScrollerArea.Value.X + area.X,
+                                             verticalScrollerArea.Value.Y + area.Y,
+                                             verticalScrollerArea.Value.Width,
+                                             verticalScrollerArea.Value.Height);
                 VerticalScrollbarForeground.Draw(batch, absoluteArea, alpha);
             }
 
@@ -560,10 +562,10 @@ namespace MonoGameUi
             if (horizontalScrollbarArea.HasValue && HorizontalScrollbarBackground != null)
             {
                 Rectangle absoluteArea = new Rectangle(
-                    horizontalScrollbarArea.Value.X + area.X,
-                    horizontalScrollbarArea.Value.Y + area.Y,
-                    horizontalScrollbarArea.Value.Width,
-                    horizontalScrollbarArea.Value.Height);
+                                             horizontalScrollbarArea.Value.X + area.X,
+                                             horizontalScrollbarArea.Value.Y + area.Y,
+                                             horizontalScrollbarArea.Value.Width,
+                                             horizontalScrollbarArea.Value.Height);
                 HorizontalScrollbarBackground.Draw(batch, absoluteArea, alpha);
             }
 
@@ -572,10 +574,10 @@ namespace MonoGameUi
             if (horizontalScrollerArea.HasValue && HorizontalScrollbarForeground != null)
             {
                 Rectangle absoluteArea = new Rectangle(
-                    horizontalScrollerArea.Value.X + area.X,
-                    horizontalScrollerArea.Value.Y + area.Y,
-                    horizontalScrollerArea.Value.Width,
-                    horizontalScrollerArea.Value.Height);
+                                             horizontalScrollerArea.Value.X + area.X,
+                                             horizontalScrollerArea.Value.Y + area.Y,
+                                             horizontalScrollerArea.Value.Width,
+                                             horizontalScrollerArea.Value.Height);
                 HorizontalScrollbarForeground.Draw(batch, absoluteArea, alpha);
             }
         }
@@ -589,9 +591,9 @@ namespace MonoGameUi
                 if (vArea.HasValue)
                 {
                     Rectangle area = new Rectangle(
-                        vArea.Value.X + AbsolutePosition.X, 
-                        vArea.Value.Y + AbsolutePosition.Y, 
-                        vArea.Value.Width, vArea.Value.Height);
+                                         vArea.Value.X + AbsolutePosition.X, 
+                                         vArea.Value.Y + AbsolutePosition.Y, 
+                                         vArea.Value.Width, vArea.Value.Height);
                     Skin.Current.FocusFrameBrush.Draw(batch, area, alpha);
                 }
 
@@ -600,9 +602,9 @@ namespace MonoGameUi
                 if (hArea.HasValue)
                 {
                     Rectangle area = new Rectangle(
-                        hArea.Value.X + AbsolutePosition.X,
-                        hArea.Value.Y + AbsolutePosition.Y,
-                        hArea.Value.Width, hArea.Value.Height);
+                                         hArea.Value.X + AbsolutePosition.X,
+                                         hArea.Value.Y + AbsolutePosition.Y,
+                                         hArea.Value.Width, hArea.Value.Height);
                     Skin.Current.FocusFrameBrush.Draw(batch, area, alpha);
                 }
             }
@@ -687,8 +689,8 @@ namespace MonoGameUi
             // Klick auf die Scrollbar (nicht auf den Scroller)
             Rectangle? verticalScrollbarArea = VerticalScrollbarArea;
             Rectangle? verticalScrollerArea = VerticalScrollerArea;
-            if (verticalScrollbarArea.HasValue && 
-                verticalScrollerArea.HasValue && 
+            if (verticalScrollbarArea.HasValue &&
+                verticalScrollerArea.HasValue &&
                 verticalScrollbarArea.Value.Intersects(args.LocalPosition))
             {
                 // Klick über den Scroller -> PageUp
@@ -705,7 +707,7 @@ namespace MonoGameUi
             // Klick auf die Scrollbar (nicht auf den Scroller)
             Rectangle? horizontalScrollbarArea = HorizontalScrollbarArea;
             Rectangle? horizontalScrollerArea = HorizontalScrollerArea;
-            if (horizontalScrollerArea.HasValue && 
+            if (horizontalScrollerArea.HasValue &&
                 horizontalScrollbarArea.HasValue &&
                 horizontalScrollbarArea.Value.Intersects(args.LocalPosition))
             {
@@ -729,12 +731,36 @@ namespace MonoGameUi
             {
                 switch (args.Key)
                 {
-                    case Keys.Left: if (HorizontalScrollbarEnabled) HorizontalScrollUp(); args.Handled = true; break;
-                    case Keys.Right: if (HorizontalScrollbarEnabled) HorizontalScrollDown(); args.Handled = true; break;
-                    case Keys.Up: if (VerticalScrollbarEnabled) VerticalScrollUp(); args.Handled = true; break;
-                    case Keys.Down: if (VerticalScrollbarEnabled) VerticalScrollDown(); args.Handled = true; break;
-                    case Keys.PageUp: if (VerticalScrollbarEnabled) VerticalScrollPageUp(); args.Handled = true; break;
-                    case Keys.PageDown: if (VerticalScrollbarEnabled) VerticalScrollPageDown(); args.Handled = true; break;
+                    case Keys.Left:
+                        if (HorizontalScrollbarEnabled)
+                            HorizontalScrollUp();
+                        args.Handled = true;
+                        break;
+                    case Keys.Right:
+                        if (HorizontalScrollbarEnabled)
+                            HorizontalScrollDown();
+                        args.Handled = true;
+                        break;
+                    case Keys.Up:
+                        if (VerticalScrollbarEnabled)
+                            VerticalScrollUp();
+                        args.Handled = true;
+                        break;
+                    case Keys.Down:
+                        if (VerticalScrollbarEnabled)
+                            VerticalScrollDown();
+                        args.Handled = true;
+                        break;
+                    case Keys.PageUp:
+                        if (VerticalScrollbarEnabled)
+                            VerticalScrollPageUp();
+                        args.Handled = true;
+                        break;
+                    case Keys.PageDown:
+                        if (VerticalScrollbarEnabled)
+                            VerticalScrollPageDown();
+                        args.Handled = true;
+                        break;
                 }
             }
 
@@ -781,16 +807,33 @@ namespace MonoGameUi
             HorizontalScrollPosition += (int)(ActualClientSize.X * 0.7f);
         }
 
-        protected virtual void OnHorizontalScrollbarEnabledChanged(PropertyEventArgs<bool> args) { }
-        protected virtual void OnVerticalScrollbarEnabledChanged(PropertyEventArgs<bool> args) { }
-        protected virtual void OnHorizontalScrollbarVisibleChanged(PropertyEventArgs<bool?> args) { }
-        protected virtual void OnVerticalScrollbarVisibleChanged(PropertyEventArgs<bool?> args) { }
+        protected virtual void OnHorizontalScrollbarEnabledChanged(PropertyEventArgs<bool> args)
+        {
+        }
 
-        protected virtual void OnHorizontalScrollPositionChanged(PropertyEventArgs<int> args) { }
+        protected virtual void OnVerticalScrollbarEnabledChanged(PropertyEventArgs<bool> args)
+        {
+        }
 
-        protected virtual void OnVerticalScrollPositionChanged(PropertyEventArgs<int> args) { }
+        protected virtual void OnHorizontalScrollbarVisibleChanged(PropertyEventArgs<bool?> args)
+        {
+        }
 
-        protected virtual void OnVirtualSizeChanged(PropertyEventArgs<Point> args) { }
+        protected virtual void OnVerticalScrollbarVisibleChanged(PropertyEventArgs<bool?> args)
+        {
+        }
+
+        protected virtual void OnHorizontalScrollPositionChanged(PropertyEventArgs<int> args)
+        {
+        }
+
+        protected virtual void OnVerticalScrollPositionChanged(PropertyEventArgs<int> args)
+        {
+        }
+
+        protected virtual void OnVirtualSizeChanged(PropertyEventArgs<Point> args)
+        {
+        }
 
         public event PropertyChangedDelegate<bool> HorizontalScrollbarEnabledChanged;
 

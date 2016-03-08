@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using engenious;
+using engenious.Graphics;
 
 namespace MonoGameUi
 {
@@ -9,8 +9,8 @@ namespace MonoGameUi
 
         public Texture2D Texture { get; set; }
 
-        public Image(IScreenManager manager, string style = "") :
-            base(manager, style)
+        public Image(IScreenManager manager, string style = "")
+            : base(manager, style)
         {
             ApplySkin(typeof(Image));
         }

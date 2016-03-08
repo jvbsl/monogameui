@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
+﻿using System;
+using engenious;
+using engenious.Graphics;
+using engenious.Input;
 
 namespace MonoGameUi
 {
@@ -52,7 +52,7 @@ namespace MonoGameUi
             set
             {
                 sliderValue = value;
-                if(ValueChanged != null)
+                if (ValueChanged != null)
                     ValueChanged.Invoke(sliderValue);
             }
         }
@@ -82,21 +82,23 @@ namespace MonoGameUi
         protected override void OnDrawContent(SpriteBatch batch, Rectangle contentArea, GameTime gameTime, float alpha)
         {
             //Berechnet die mögliche Zeichenfläche für den SliderKnob
-            Rectangle drawableKnobSpace = new Rectangle(contentArea.X + SliderWidth / 2, contentArea.Y + SliderWidth/2, contentArea.Width - SliderWidth, contentArea.Height - SliderWidth);
+            Rectangle drawableKnobSpace = new Rectangle(contentArea.X + SliderWidth / 2, contentArea.Y + SliderWidth / 2, contentArea.Width - SliderWidth, contentArea.Height - SliderWidth);
 
             //Berechnen des Werts wenn die Maus gehalten wird & das Control ausgewählt ist
             if (mouseClickActive)
             {
                 MouseState mouse = Mouse.GetState();
-                Point localMousePos = mouse.Position - new Point(contentArea.X, contentArea.Y); //Berechnet die Position relativ zum Control
+                Point localMousePos = new Point(mouse.X - contentArea.X, mouse.Y - contentArea.Y); //Berechnet die Position relativ zum Control
 
                 //Wenn der Slider Horizontal ist
                 if (Orientation == Orientation.Horizontal)
                 {
                     //Berechne den Wert des Sliders
                     Value = (int)Math.Round(localMousePos.X / ((float)contentArea.Width / Range));
-                    if (localMousePos.X <= 0) Value = 0;                     //Wenn die Maus Position kleiner als 0 ist -> Value = 0
-                    if (localMousePos.X >= contentArea.Width) Value = Range; //Wenn die Maus Position größer als die Breite des Controls -> Value = Range
+                    if (localMousePos.X <= 0)
+                        Value = 0;                     //Wenn die Maus Position kleiner als 0 ist -> Value = 0
+                    if (localMousePos.X >= contentArea.Width)
+                        Value = Range; //Wenn die Maus Position größer als die Breite des Controls -> Value = Range
                 }
 
                 //Wenn der Slider vertikal ist
@@ -104,8 +106,10 @@ namespace MonoGameUi
                 {
                     //Berechne den Wert des Sliders
                     Value = (contentArea.Height - localMousePos.Y) / (contentArea.Height / Range);
-                    if (Value <= 0) Value = 0;                      //Wenn die Maus Position kleiner als 0 ist -> Value = 0
-                    if (Value >= Range) Value = Range;              //Wenn die Maus Position größer als die Breite des Controls -> Value = Range
+                    if (Value <= 0)
+                        Value = 0;                      //Wenn die Maus Position kleiner als 0 ist -> Value = 0
+                    if (Value >= Range)
+                        Value = Range;              //Wenn die Maus Position größer als die Breite des Controls -> Value = Range
                 }
 
             }
@@ -125,7 +129,7 @@ namespace MonoGameUi
                 sliderKnob.Y = contentArea.Y;                                                       //Y Koordinate des Knobs
                 sliderKnob.Width = SliderWidth;                                                              //Der Slider ist SliderWidth breit
                 float WidthRange = ((float)drawableKnobSpace.Width / Range);                        //Berechnet wieviel Pixel 1 in Value wert ist
-                sliderKnob.X = (int)Math.Round(drawableKnobSpace.X + (WidthRange * Value) - SliderWidth/2);    //Berechnet die X Position des Knobs
+                sliderKnob.X = (int)Math.Round(drawableKnobSpace.X + (WidthRange * Value) - SliderWidth / 2);    //Berechnet die X Position des Knobs
                 sliderKnob.Height = contentArea.Height;                                             //Der SliderKnob ist immer so hoch wie der Slider
             }
             else
@@ -134,7 +138,7 @@ namespace MonoGameUi
                 sliderKnob.X = contentArea.X;                                                       //Der SliderKnob beginnt immer am oberen Rand des Sliders
                 sliderKnob.Height = SliderWidth;                                                             //Der Slider ist SliderWidthpx hoch
                 float HeightRange = ((float)drawableKnobSpace.Height / Range);                      //Berechnet wieviel Pixel 1 in Value wert ist
-                sliderKnob.Y = (int)Math.Round(drawableKnobSpace.Y + drawableKnobSpace.Height - (HeightRange *Value) - SliderWidth/2);    //Berechnet die X Position des Knobs
+                sliderKnob.Y = (int)Math.Round(drawableKnobSpace.Y + drawableKnobSpace.Height - (HeightRange * Value) - SliderWidth / 2);    //Berechnet die X Position des Knobs
                 sliderKnob.Width = contentArea.Width;                                               //Der SliderKnob ist immer so breit wie der Slider
             }
 

@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using System.Linq;
+﻿using System.Linq;
+using engenious;
 
 namespace MonoGameUi
 {
@@ -39,7 +39,8 @@ namespace MonoGameUi
 
         void Selector_SelectedItemChanged(Control sender, SelectionEventArgs<T> args)
         {
-            if (Selector.Parent == null) return;
+            if (Selector.Parent == null)
+                return;
 
             ScreenManager.Flyback(Selector);
             this.SelectedItem = args.NewItem;

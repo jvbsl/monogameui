@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using engenious;
+using engenious.Content;
+using engenious.Graphics;
+using engenious.Input;
 
 namespace MonoGameUi
 {
@@ -71,17 +71,17 @@ namespace MonoGameUi
         {
             Content = game.Content;
 
-            Game.Window.TextInput += (s, e) =>
+            Game.KeyPress += (s, e) =>
             {
                 if (Game.IsActive)
                 {
-                    KeyTextEventArgs args = new KeyTextEventArgs() { Character = e.Character };
+                    KeyTextEventArgs args = new KeyTextEventArgs() { Character = e };
                    
                     root.InternalKeyTextPress(args);
                 }
             };
 
-            Game.Window.ClientSizeChanged += (s, e) =>
+            Game.Resized += (s, e) =>
             {
                 ClientSizeChanged?.Invoke(s, e);
             };
@@ -148,7 +148,7 @@ namespace MonoGameUi
                 MouseState mouse = Mouse.GetState();
 
                 // Mausposition anhand des Mouse Modes ermitteln
-                Point mousePosition = mouse.Position;
+                Point mousePosition = new Point(mouse.X, mouse.Y);
                 if (MouseMode == MouseMode.Captured)
                     mousePosition = new Point(
                         mousePosition.X - (GraphicsDevice.Viewport.Width / 2), 
@@ -170,10 +170,10 @@ namespace MonoGameUi
                     {
                         // Linke Maustaste wurde neu gedrückt
                         root.InternalLeftMouseDown(new MouseEventArgs
-                        {
-                            GlobalPosition = mousePosition,
-                            LocalPosition = mousePosition
-                        });
+                            {
+                                GlobalPosition = mousePosition,
+                                LocalPosition = mousePosition
+                            });
                     }
                     lastLeftMouseButtonPressed = true;
                 }
@@ -183,18 +183,18 @@ namespace MonoGameUi
                     {
                         // Linke Maustaste wurde losgelassen
                         root.InternalLeftMouseClick(new MouseEventArgs
-                        {
-                            MouseMode = MouseMode,
-                            GlobalPosition = mousePosition,
-                            LocalPosition = mousePosition
-                        });
+                            {
+                                MouseMode = MouseMode,
+                                GlobalPosition = mousePosition,
+                                LocalPosition = mousePosition
+                            });
 
                         root.InternalLeftMouseUp(new MouseEventArgs
-                        {
-                            MouseMode = MouseMode,
-                            GlobalPosition = mousePosition,
-                            LocalPosition = mousePosition
-                        });
+                            {
+                                MouseMode = MouseMode,
+                                GlobalPosition = mousePosition,
+                                LocalPosition = mousePosition
+                            });
                     }
                     lastLeftMouseButtonPressed = false;
                 }
@@ -206,11 +206,11 @@ namespace MonoGameUi
                     {
                         // Rechte Maustaste neu gedrückt
                         root.InternalRightMouseDown(new MouseEventArgs
-                        {
-                            MouseMode = MouseMode,
-                            GlobalPosition = mousePosition,
-                            LocalPosition = mousePosition
-                        });
+                            {
+                                MouseMode = MouseMode,
+                                GlobalPosition = mousePosition,
+                                LocalPosition = mousePosition
+                            });
                     }
                     lastRightMouseButtonPressed = true;
                 }
@@ -220,18 +220,18 @@ namespace MonoGameUi
                     {
                         // Rechte Maustaste losgelassen
                         root.InternalRightMouseUp(new MouseEventArgs
-                        {
-                            MouseMode = MouseMode,
-                            GlobalPosition = mousePosition,
-                            LocalPosition = mousePosition
-                        });
+                            {
+                                MouseMode = MouseMode,
+                                GlobalPosition = mousePosition,
+                                LocalPosition = mousePosition
+                            });
 
                         root.InternalRightMouseClick(new MouseEventArgs
-                        {
-                            MouseMode = MouseMode,
-                            GlobalPosition = mousePosition,
-                            LocalPosition = mousePosition
-                        });
+                            {
+                                MouseMode = MouseMode,
+                                GlobalPosition = mousePosition,
+                                LocalPosition = mousePosition
+                            });
                     }
                     lastRightMouseButtonPressed = false;
                 }
@@ -241,19 +241,19 @@ namespace MonoGameUi
                 {
                     int diff = (mouse.ScrollWheelValue - lastMouseWheelValue);
                     root.InternalMouseScroll(new MouseScrollEventArgs
-                    {
-                        MouseMode = MouseMode,
-                        GlobalPosition = mousePosition,
-                        LocalPosition = mousePosition,
-                        Steps = diff
-                    });
+                        {
+                            MouseMode = MouseMode,
+                            GlobalPosition = mousePosition,
+                            LocalPosition = mousePosition,
+                            Steps = diff
+                        });
                     lastMouseWheelValue = mouse.ScrollWheelValue;
                 }
 
                 // Potentieller Positionsreset
                 if (MouseMode == MouseMode.Free)
                 {
-                    lastMousePosition = mouse.Position;
+                    lastMousePosition = new Point(mouse.X, mouse.Y);
                 }
                 else if (mousePosition.X != 0 || mousePosition.Y != 0)
                 {
@@ -309,8 +309,10 @@ namespace MonoGameUi
                             // Spezialfall Tab-Taste (falls nicht verarbeitet wurde)
                             if (key == Keys.Tab && !args.Handled)
                             {
-                                if (shift) root.InternalTabbedBackward();
-                                else root.InternalTabbedForward();
+                                if (shift)
+                                    root.InternalTabbedBackward();
+                                else
+                                    root.InternalTabbedForward();
                             }
                         }
                         else
@@ -375,8 +377,8 @@ namespace MonoGameUi
             string screentitle = ActiveScreen != null ? ActiveScreen.Title : string.Empty;
             string windowtitle = TitlePrefix + (string.IsNullOrEmpty(screentitle) ? "" : " - " + screentitle);
 
-            if (Game.Window != null && Game.Window.Title != windowtitle)
-                Game.Window.Title = windowtitle;
+            if (Game != null && Game.Title != windowtitle)
+                Game.Title = windowtitle;
 
             #endregion
         }
@@ -465,7 +467,10 @@ namespace MonoGameUi
                 ActiveScreen.InternalNavigateFrom(args);
 
                 // Abbruch durch Screen eingeleitet
-                if (args.Cancel) { return false; }
+                if (args.Cancel)
+                {
+                    return false;
+                }
 
                 // Screen deaktivieren
                 ActiveScreen.IsActiveScreen = false;
@@ -507,7 +512,8 @@ namespace MonoGameUi
                 args.Screen = ActiveScreen;
                 ActiveScreen = null;
             }
-            else args.Screen = null;
+            else
+                args.Screen = null;
 
             // Schritt 2: zum neuen Screen navigieren
             if (screen != null)

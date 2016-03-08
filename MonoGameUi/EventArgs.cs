@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+﻿using engenious;
+using engenious.Input;
 
 namespace MonoGameUi
 {
@@ -24,7 +24,9 @@ namespace MonoGameUi
 
         public T NewValue { get; set; }
 
-        public PropertyEventArgs() { }
+        public PropertyEventArgs()
+        {
+        }
 
         public PropertyEventArgs(T oldValue, T newValue)
         {
@@ -53,7 +55,9 @@ namespace MonoGameUi
         /// </summary>
         public Point GlobalPosition { get; set; }
 
-        public MouseEventArgs() { }
+        public MouseEventArgs()
+        {
+        }
 
         public MouseEventArgs(MouseMode mouseMode, Point localPosition, Point globalPosition)
         {
@@ -67,7 +71,9 @@ namespace MonoGameUi
     {
         public int Steps { get; set; }
 
-        public MouseScrollEventArgs() { }
+        public MouseScrollEventArgs()
+        {
+        }
 
         public MouseScrollEventArgs(int steps)
         {
@@ -166,23 +172,23 @@ namespace MonoGameUi
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="args"></param>
-    public delegate void EventDelegate(Control sender, EventArgs args);
+    public delegate void EventDelegate(Control sender,EventArgs args);
 
     /// <summary>
     /// Event Delegat für Maus-Events.
     /// </summary>
     /// <param name="sender">Aufrufendes Control</param>
     /// <param name="args">Eventargumente</param>
-    public delegate void MouseEventDelegate(Control sender, MouseEventArgs args);
+    public delegate void MouseEventDelegate(Control sender,MouseEventArgs args);
 
-    public delegate void MouseScrollEventDelegate(Control sender, MouseScrollEventArgs args);
+    public delegate void MouseScrollEventDelegate(Control sender,MouseScrollEventArgs args);
 
     /// <summary>
     /// Event Delegat für Keyboard-Events.
     /// </summary>
     /// <param name="sender">Aufrufendes Control</param>
     /// <param name="args">Eventargumente</param>
-    public delegate void KeyEventDelegate(Control sender, KeyEventArgs args);
+    public delegate void KeyEventDelegate(Control sender,KeyEventArgs args);
 
     /// <summary>
     /// Event Delegat für KeyDown im ScreenManager
@@ -195,16 +201,16 @@ namespace MonoGameUi
     /// </summary>
     /// <param name="sender">Aufrufendes Control</param>
     /// <param name="args">Eventargumente</param>
-    public delegate void KeyTextEventDelegate(Control sender, KeyTextEventArgs args);
+    public delegate void KeyTextEventDelegate(Control sender,KeyTextEventArgs args);
 
     /// <summary>
     /// Delegat für Events rum um Selektionsänderungen
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="args"></param>
-    public delegate void SelectionDelegate<T>(Control sender, SelectionEventArgs<T> args);
+    public delegate void SelectionDelegate<T>(Control sender,SelectionEventArgs<T> args);
 
-    public delegate void CollectionDelegate(Control sender, CollectionEventArgs args);
+    public delegate void CollectionDelegate(Control sender,CollectionEventArgs args);
 
-    public delegate void PropertyChangedDelegate<T>(Control sender, PropertyEventArgs<T> args);
+    public delegate void PropertyChangedDelegate<T>(Control sender,PropertyEventArgs<T> args);
 }

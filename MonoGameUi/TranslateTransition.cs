@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
+using engenious;
 
 namespace MonoGameUi
 {
@@ -9,9 +9,11 @@ namespace MonoGameUi
         private Point to;
 
         public TranslateTransition(Control control, Func<float, float> curve, TimeSpan time, Point to)
-            : this(control, curve, time, TimeSpan.Zero, to) { }
+            : this(control, curve, time, TimeSpan.Zero, to)
+        {
+        }
 
-        public TranslateTransition(Control control, Func<float,float> curve, TimeSpan time, TimeSpan delay, Point to) 
+        public TranslateTransition(Control control, Func<float,float> curve, TimeSpan time, TimeSpan delay, Point to)
             : base(control, curve, time, delay)
         {
             from = new Point(

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework;
 
 namespace MonoGameUi
 {
@@ -40,19 +39,20 @@ namespace MonoGameUi
         /// Die nötigen Brushes
         /// </summary>
         public Brush tabActiveBrush;
-        public Brush tabBrush ;
-        public Brush tabPageBackground ;
-        public Brush tabListBackground ;
+        public Brush tabBrush;
+        public Brush tabPageBackground;
+        public Brush tabListBackground;
 
         /// <summary>
         /// Die Brush für den aktiven Tab
         /// </summary>
-        public Brush TabActiveBrush {
+        public Brush TabActiveBrush
+        {
             get { return tabActiveBrush; }
             set
             {
                 tabActiveBrush = value;
-                if(tabListStack.Controls.Count > 0)
+                if (tabListStack.Controls.Count > 0)
                     tabListStack.Controls.ElementAt(SelectedTabIndex).Background = tabActiveBrush;
             }
         }
@@ -103,7 +103,8 @@ namespace MonoGameUi
         /// </summary>
         private int tabSpacing;
 
-        public int TabSpacing {
+        public int TabSpacing
+        {
             get
             {
                 return tabSpacing;
@@ -128,7 +129,8 @@ namespace MonoGameUi
         /// Base Constructor
         /// </summary>
         /// <param name="manager">ScreenManager</param>
-        public TabControl(IScreenManager manager) : base(manager)
+        public TabControl(IScreenManager manager)
+            : base(manager)
         { 
 
             Manager = manager;
@@ -172,8 +174,9 @@ namespace MonoGameUi
             title.LeftMouseClick += (s, e) => SelectTab(Pages.IndexOf(item));
             title.CanFocus = true;
             title.TabStop = true;
-            title.KeyDown += (s, e) => {
-                if (e.Key == Microsoft.Xna.Framework.Input.Keys.Enter && title.Focused == TreeState.Active)
+            title.KeyDown += (s, e) =>
+            {
+                if (e.Key == engenious.Input.Keys.Enter && title.Focused == TreeState.Active)
                     SelectTab(Pages.IndexOf(item));
             };
             tabListStack.Controls.Add(title);
@@ -191,7 +194,8 @@ namespace MonoGameUi
             {
                 if (index >= tabListStack.Controls.Count)                //Wenn die letzte Page entfernt wird...
                     SelectedTabIndex = tabListStack.Controls.Count - 1;     //Setze den TabIndex auf die "neue" letzte
-                else SelectedTabIndex = index;                          //Andernfalls, setze den TabIndex  auf den aktuellen index
+                else
+                    SelectedTabIndex = index;                          //Andernfalls, setze den TabIndex  auf den aktuellen index
 
                 SelectTab(SelectedTabIndex);                            //Selektiere den Tab
             }
@@ -209,7 +213,7 @@ namespace MonoGameUi
 
             tabPage.Content = Pages.ElementAt(SelectedTabIndex);
 
-            if(TabIndexChanged != null)
+            if (TabIndexChanged != null)
                 TabIndexChanged.Invoke(this, Pages.ElementAt(index), SelectedTabIndex);
         }
 
@@ -239,6 +243,6 @@ namespace MonoGameUi
         /// </summary>
         public event SelectionChangedDelegate TabIndexChanged;
 
-        public delegate void SelectionChangedDelegate(Control control, TabPage tab, int index);
+        public delegate void SelectionChangedDelegate(Control control,TabPage tab,int index);
     }
 }

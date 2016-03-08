@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using engenious;
+using engenious.Content;
+using engenious.Graphics;
 
 namespace MonoGameUi
 {
@@ -67,123 +67,123 @@ namespace MonoGameUi
 
             // Control
             ControlSkins.Add(typeof(Control), (c) =>
-            {
-                Control control = c as Control;
-                control.Margin = Border.All(0);
-                control.Padding = Border.All(0);
-                control.HorizontalAlignment = HorizontalAlignment.Center;
-                control.VerticalAlignment = VerticalAlignment.Center;
-            });
+                {
+                    Control control = c as Control;
+                    control.Margin = Border.All(0);
+                    control.Padding = Border.All(0);
+                    control.HorizontalAlignment = HorizontalAlignment.Center;
+                    control.VerticalAlignment = VerticalAlignment.Center;
+                });
 
             // Label
             ControlSkins.Add(typeof(Label), (c) =>
-            {
-                Label label = c as Label;
-                label.VerticalTextAlignment = VerticalAlignment.Center;
-                label.HorizontalTextAlignment = HorizontalAlignment.Left;
-                label.Font = Current.TextFont;
-                label.TextColor = Current.TextColorBlack;
-                label.Padding = Border.All(5);
-            });
+                {
+                    Label label = c as Label;
+                    label.VerticalTextAlignment = VerticalAlignment.Center;
+                    label.HorizontalTextAlignment = HorizontalAlignment.Left;
+                    label.Font = Current.TextFont;
+                    label.TextColor = Current.TextColorBlack;
+                    label.Padding = Border.All(5);
+                });
 
             // Button
             ControlSkins.Add(typeof(Button), (c) =>
-            {
-                Button button = c as Button;
-                button.Margin = Border.All(2);
-                button.Padding = Border.All(5);
-                button.Background = Current.ButtonBrush;
-                button.HoveredBackground = Current.ButtonHoverBrush;
-                button.PressedBackground = Current.ButtonPressedBrush;
-            });
+                {
+                    Button button = c as Button;
+                    button.Margin = Border.All(2);
+                    button.Padding = Border.All(5);
+                    button.Background = Current.ButtonBrush;
+                    button.HoveredBackground = Current.ButtonHoverBrush;
+                    button.PressedBackground = Current.ButtonPressedBrush;
+                });
 
             // Splitter
             ControlSkins.Add(typeof(Splitter), (c) =>
-            {
-                Splitter splitter = c as Splitter;
-                splitter.HorizontalAlignment = HorizontalAlignment.Stretch;
-                splitter.VerticalAlignment = VerticalAlignment.Stretch;
-                splitter.Orientation = Orientation.Horizontal;
-                splitter.SplitterSize = Current.SplitterWidth;
-                splitter.SplitterPosition = 200;
-                splitter.SplitterBrushHorizontal = Current.HorizontalSplitterBrush;
-                splitter.SplitterBrushVertical = Current.VerticalSplitterBrush;
-            });
+                {
+                    Splitter splitter = c as Splitter;
+                    splitter.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    splitter.VerticalAlignment = VerticalAlignment.Stretch;
+                    splitter.Orientation = Orientation.Horizontal;
+                    splitter.SplitterSize = Current.SplitterWidth;
+                    splitter.SplitterPosition = 200;
+                    splitter.SplitterBrushHorizontal = Current.HorizontalSplitterBrush;
+                    splitter.SplitterBrushVertical = Current.VerticalSplitterBrush;
+                });
 
             // Scrollcontainer
             ControlSkins.Add(typeof(ScrollContainer), (c) =>
-            {
-                ScrollContainer scrollContainer = c as ScrollContainer;
-                scrollContainer.HorizontalScrollbarBackground = Current.HorizontalScrollBackgroundBrush;
-                scrollContainer.HorizontalScrollbarForeground = Current.HorizontalScrollForegroundBrush;
-                scrollContainer.VerticalScrollbarBackground = Current.VerticalScrollBackgroundBrush;
-                scrollContainer.VerticalScrollbarForeground = Current.VerticalScrollForegroundBrush;
-                scrollContainer.ScrollbarWidth = Current.ScrollbarWidth;
-                scrollContainer.ScrollerMinSize = Current.ScrollerMinSize;
-            });
+                {
+                    ScrollContainer scrollContainer = c as ScrollContainer;
+                    scrollContainer.HorizontalScrollbarBackground = Current.HorizontalScrollBackgroundBrush;
+                    scrollContainer.HorizontalScrollbarForeground = Current.HorizontalScrollForegroundBrush;
+                    scrollContainer.VerticalScrollbarBackground = Current.VerticalScrollBackgroundBrush;
+                    scrollContainer.VerticalScrollbarForeground = Current.VerticalScrollForegroundBrush;
+                    scrollContainer.ScrollbarWidth = Current.ScrollbarWidth;
+                    scrollContainer.ScrollerMinSize = Current.ScrollerMinSize;
+                });
 
             // StackPanel
             ControlSkins.Add(typeof(StackPanel), (c) =>
-            {
-                StackPanel stackPanel = c as StackPanel;
-            });
+                {
+                    StackPanel stackPanel = c as StackPanel;
+                });
 
             // ListControl
             ControlSkins.Add(typeof(ListControl<>), (c) =>
-            {
-                dynamic listControl = c;
-                listControl.SelectedItemBrush = Current.SelectedItemBrush;
-            });
+                {
+                    dynamic listControl = c;
+                    listControl.SelectedItemBrush = Current.SelectedItemBrush;
+                });
 
             // Listbox
             ControlSkins.Add(typeof(Listbox<>), (c) =>
-            {
-                dynamic listBox = c;
-            });
+                {
+                    dynamic listBox = c;
+                });
 
             // Combobox
             ControlSkins.Add(typeof(Combobox<>), (c) =>
-            {
-                dynamic comboBox = c;
-                comboBox.Background = new BorderBrush(Color.White);
+                {
+                    dynamic comboBox = c;
+                    comboBox.Background = new BorderBrush(Color.White);
 
-            });
+                });
 
             // Progressbar
             ControlSkins.Add(typeof(ProgressBar), (c) =>
-            {
-                ProgressBar progressBar = c as ProgressBar;
-                progressBar.BarBrush = Current.ProgressBarBrush;
-            });
+                {
+                    ProgressBar progressBar = c as ProgressBar;
+                    progressBar.BarBrush = Current.ProgressBarBrush;
+                });
 
             //Slider
             ControlSkins.Add(typeof(Slider), (c) =>
-            {
-                Slider s = c as Slider;
-                s.Orientation = Orientation.Horizontal;
-                s.SliderBackgroundBrush = new BorderBrush(Color.LightGray);
-                s.SliderForegroundBrush = new BorderBrush(Color.SlateGray);
-                s.SliderWidth = 20;
-            });
+                {
+                    Slider s = c as Slider;
+                    s.Orientation = Orientation.Horizontal;
+                    s.SliderBackgroundBrush = new BorderBrush(Color.LightGray);
+                    s.SliderForegroundBrush = new BorderBrush(Color.SlateGray);
+                    s.SliderWidth = 20;
+                });
 
             ControlSkins.Add(typeof(Checkbox), (c) =>
-            {
-                Checkbox checkbox = c as Checkbox;
-                checkbox.BoxBrush = new BorderBrush(Color.Black);
-                checkbox.InnerBoxBrush = new BorderBrush(Color.LightGray);
-                checkbox.HookBrush = new BorderBrush(Color.LawnGreen);
-                checkbox.Width = 20;
-                checkbox.Height = 20;
-            });
+                {
+                    Checkbox checkbox = c as Checkbox;
+                    checkbox.BoxBrush = new BorderBrush(Color.Black);
+                    checkbox.InnerBoxBrush = new BorderBrush(Color.LightGray);
+                    checkbox.HookBrush = new BorderBrush(Color.LawnGreen);
+                    checkbox.Width = 20;
+                    checkbox.Height = 20;
+                });
 
             ControlSkins.Add(typeof(TabControl), (c) =>
-            {
-                TabControl tabControl = c as TabControl;
-                tabControl.TabBrush = new BorderBrush(Color.LightGray);
-                tabControl.TabActiveBrush = new BorderBrush(Color.Gray);
-                tabControl.TabPageBackground = new BorderBrush(Color.Gray);
-                tabControl.TabSpacing = 1;
-            });
+                {
+                    TabControl tabControl = c as TabControl;
+                    tabControl.TabBrush = new BorderBrush(Color.LightGray);
+                    tabControl.TabActiveBrush = new BorderBrush(Color.Gray);
+                    tabControl.TabPageBackground = new BorderBrush(Color.Gray);
+                    tabControl.TabSpacing = 1;
+                });
         }
 
         #region Basic Values

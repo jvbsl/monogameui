@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using MonoGameUi;
+﻿using MonoGameUi;
+using engenious;
+using engenious.Input;
 
 namespace SampleClient.Screens
 {
@@ -10,7 +10,8 @@ namespace SampleClient.Screens
 
         private Label output;
 
-        public MouseCaptureScreen(IScreenManager manager) : base(manager)
+        public MouseCaptureScreen(IScreenManager manager)
+            : base(manager)
         {
             DefaultMouseMode = MouseMode.Captured;
 

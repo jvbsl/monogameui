@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using engenious;
 
 namespace MonoGameUi
 {
@@ -13,8 +13,8 @@ namespace MonoGameUi
 
         public List<RowDefinition> Rows { get; private set; }
 
-        public Grid(IScreenManager manager, string style = "") :
-            base(manager, style)
+        public Grid(IScreenManager manager, string style = "")
+            : base(manager, style)
         {
             Columns = new List<ColumnDefinition>();
             Rows = new List<RowDefinition>();
@@ -42,16 +42,20 @@ namespace MonoGameUi
             for (int x = 0; x < columnSpan; x++)
             {
                 int colIndex = column + x;
-                if (colIndex < 0) continue;
-                if (colIndex >= Columns.Count) continue;
+                if (colIndex < 0)
+                    continue;
+                if (colIndex >= Columns.Count)
+                    continue;
                 mapping.Columns.Add(Columns[colIndex]);
             }
 
             for (int y = 0; y < rowSpan; y++)
             {
                 int rowIndex = row + y;
-                if (rowIndex < 0) continue;
-                if (rowIndex >= Rows.Count) continue;
+                if (rowIndex < 0)
+                    continue;
+                if (rowIndex >= Rows.Count)
+                    continue;
                 mapping.Rows.Add(Rows[rowIndex]);
             }
 
@@ -68,8 +72,8 @@ namespace MonoGameUi
             foreach (var mapping in cellMapping)
             {
                 Point cell = new Point(
-                    mapping.Columns.All(c => c.ResizeMode == ResizeMode.Fixed) ? mapping.Columns.Sum(c => c.Width) : client.X,
-                    mapping.Rows.All(r => r.ResizeMode == ResizeMode.Fixed) ? mapping.Rows.Sum(r => r.Height) : client.Y);
+                                 mapping.Columns.All(c => c.ResizeMode == ResizeMode.Fixed) ? mapping.Columns.Sum(c => c.Width) : client.X,
+                                 mapping.Rows.All(r => r.ResizeMode == ResizeMode.Fixed) ? mapping.Rows.Sum(r => r.Height) : client.Y);
                 mapping.ExpectedSize = mapping.Control.GetExpectedSize(cell);
             }
 
