@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{76523A7B-D44D-4F97-ABE7-E56E29CDD653}"
 	ProjectSection(SolutionItems) = preProject
 		libs\engenious.dll = libs\engenious.dll
+		libs\OpenTK.dll = libs\OpenTK.dll
 	EndProjectSection
 EndProject
 Global
